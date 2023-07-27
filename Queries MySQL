@@ -1,0 +1,28 @@
+sample Data
+
+Campaign	Call Type - 2
+Lead Generation	Sales
+Lead Generation	Sales
+MCO - Mortgage Checkup CO	Non-sales
+INB - Inbound	Sales
+INB - Inbound	Sales
+MCO - Mortgage Checkup CO	Non-sales
+CSH - Cash Out	Sales
+
+Code- to find campaign name , salescount, non-sales count
+
+SELECT s.`Campaign`, t1.sales, t2.`Non-sales`
+FROM
+
+  (SELECT `Campaign`, COUNT(`Call Type - 2`) AS sales
+   FROM `IP_DFR`
+   WHERE `Call Type - 2` = "Sales"
+   GROUP BY `Campaign`) t1
+JOIN
+  (SELECT `Campaign`, COUNT(`Call Type - 2`) AS `Non-sales`
+   FROM `IP_DFR`
+   WHERE `Call Type - 2` = "Non-sales"
+   GROUP BY `Campaign`) t2
+ON t1.`Campaign` = t2.`Campaign`;
+
+
